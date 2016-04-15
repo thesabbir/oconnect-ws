@@ -10,7 +10,7 @@ local function server(handler)
     },
     default = handler
   }
-
+  -- Start copas loop
   copas.loop()
 end
 

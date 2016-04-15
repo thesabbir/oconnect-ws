@@ -1,30 +1,25 @@
 local json = require "cjson"
 
+-- Event Listeners
+
 local events = {}
 
-events["error"] = function(app)
-  print("Error Event")
-  local res = json.encode(app.data)
-  app.ws:send(res)
+events["error"] = function(client)
+  client.send(client.data)
 end
 
-events["status"] = function(app)
-  print("Status Event")
-  local res = json.encode(app.data)
-  app.ws:send(res)
+events["status"] = function(client)
+  client.send(client.data)
 end
 
-events["getinfo"] = function(app)
-  print("GetInfo Event")
-  local res = json.encode(app.data)
-  app.ws:send(res)
+events["getinfo"] = function(client)
+  client.send(client.data)
 end
 
-
-
-local function eventListeners(app)
-  print(app.data.event)
-  events[app.data.event](app)
+-- dispatcher
+local function eventListeners(client)
+  print(client.data.event)
+  events[client.data.event](client)
 end
 
 return {

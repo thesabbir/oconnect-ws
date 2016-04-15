@@ -10,18 +10,14 @@ end
 
 
 local function bodyParser(body)
-  if type(body) == "string" then
-    print("ITS STRING")
-    local bodyTable = json.decode(body)
-    if bodyTable.event == nil or bodyTable.message == nil then
-      print("ITS DOES NOT HAVE VALID FORMAT")
-      return dataError()
+  if type(body) == "string" then -- Check if body is strig
+    local bodyTable = json.decode(body) -- decode json
+    if bodyTable.event == nil or bodyTable.message == nil then -- check format
+      return dataError() -- return data error event
     end
-    print("ITS DOES HAVE VALID FORMAT")
-    return bodyTable
+    return bodyTable -- Return body
   else
-    print("ITS NOT STRING")
-    return dataError()
+    return dataError() -- if not string: data error
   end
 end
 

@@ -1,21 +1,23 @@
 local events = require 'events'
 local parser = require 'parser'
 local server = require 'server'
+local json = require "cjson"
 
 
 local App = function(ws)
-  local app = {}
-  app.ws = ws
-  while true do
+  -- Create a client
+  local client = {}
+  client.send = function(data) ws:send(json.encode(data)) end -- send function
+  while true do -- loop
     local body, code = ws:receive()
     if body then
-      app.data = parser.parse(body)
-      events.listen(app)
+      client.data = parser.parse(body) -- parse icoming message
+      events.listen(client) -- event Listeners
     else
-      ws:close()
+      ws:close() -- Close connection
       return
     end
   end
 end
 
-server.start(App)
+server.start(App) -- Start the server with App handler
