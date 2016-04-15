@@ -1,16 +1,16 @@
-local json = require "cjson"
+local json = require 'cjson'
 
 
 local function dataError()
   return {
-        event = "error",
-        message = "Invalid Data Type. Please send a vaild json data."
+        event = 'error',
+        message = 'Invalid Data Type. Please send a vaild json data.'
       }
 end
 
 
 local function bodyParser(body)
-  if type(body) == "string" then -- Check if body is strig
+  if type(body) == 'string' then -- Check if body is strig
     local bodyTable = json.decode(body) -- decode json
     if bodyTable.event == nil or bodyTable.message == nil then -- check format
       return dataError() -- return data error event

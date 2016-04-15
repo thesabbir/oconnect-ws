@@ -1,18 +1,18 @@
-local json = require "cjson"
+local json = require 'cjson'
 
 -- Event Listeners
 
 local events = {}
 
-events["error"] = function(client)
+events['error'] = function(client)
   client.send(client.data)
 end
 
-events["status"] = function(client)
+events['status'] = function(client)
   client.send(client.data)
 end
 
-events["getinfo"] = function(client)
+events['getinfo'] = function(client)
   client.send(client.data)
 end
 
