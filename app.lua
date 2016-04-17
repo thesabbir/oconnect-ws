@@ -1,7 +1,7 @@
 local events = require 'events'
 local parser = require 'parser'
 local server = require 'server'
-local json = require "cjson"
+local json = require 'cjson'
 
 
 local App = function(ws)
